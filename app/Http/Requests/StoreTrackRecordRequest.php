@@ -1,0 +1,34 @@
+<?php
+
+namespace App\Http\Requests;
+
+use App\Models\TrackRecord;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+
+class StoreTrackRecordRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, array<int, \Illuminate\Contracts\Validation\ValidationRule|string>|string>
+     */
+    public function rules(): array
+    {
+        return [
+            'agency_id' => ['required', 'integer', Rule::exists('agencies', 'id')],
+            'title' => ['required', 'string', 'max:255'],
+            'estimated_revenue' => ['nullable', 'numeric'],
+            'status' => ['required', Rule::in(TrackRecord::statuses())],
+            'note' => ['nullable', 'string'],
+        ];
+    }
+}
