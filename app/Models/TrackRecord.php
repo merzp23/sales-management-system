@@ -26,9 +26,13 @@ class TrackRecord extends Model
     use HasFactory;
 
     public const STATUS_NEW = 'new';
+
     public const STATUS_CONTACTED = 'contacted';
+
     public const STATUS_POTENTIAL = 'potential';
+
     public const STATUS_CLOSED = 'closed';
+
     public const STATUS_LOST = 'lost';
 
     /**
